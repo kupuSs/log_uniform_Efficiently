@@ -1,17 +1,9 @@
-# log_uniform_Efficiently
-log uniform efficient implementation<br>
-> 主要是通过二分查找来优化算法，且易于移植
-
-#### 代码示例
-
-```python
-#!/usr/bin/env python3
 import random
 import time
+import pandas as pd
 from collections import Counter
 
 import log_uniform
-
 
 fruits_dict = {  # 模拟水果的售卖数量
     'apple': 16,
@@ -61,26 +53,11 @@ if __name__ == '__main__':
     print('random sampling {} cost time: {} sec'.format(SAMPLING_NUMS, time.time() - start))
 
     fruits_random_ranked = sorted(Counter(fruits_random_list).items(), key=lambda d: d[1], reverse=True)
-```
-> log uniform sampling 1000000 cost time: 2.7911570072174072 sec
 
-> random sampling 1000000 cost time: 3.270305871963501 sec
+    df = pd.DataFrame(
+        index=[fruits_random_ranked[i][0] for i in range(len(fruits_dict))],
+        columns=['random', 'log uniform'])
 
-> 速度比随机快
-
-
- ```python
-import pandas as pd
-
-df = pd.DataFrame(
-    index=[fruits_random_ranked[i][0] for i in range(len(fruits_dict))],
-    columns=['random', 'log uniform'])
-
-df['random'] = [fruits_random_ranked[i][1]/SAMPLING_NUMS for i in range(len(fruits_dict))]
-df['log uniform'] = [fruits_log_uniform_ranked[i][1]/SAMPLING_NUMS for i in range(len(fruits_dict))]
-```
-
-
-![Image text](https://github.com/kupuSs/log_uniform_Efficiently/WX20200707-000711@2x.png)
-
-> 会对长尾部分的数据进行更多的采样
+    df['random'] = [fruits_random_ranked[i][1]/SAMPLING_NUMS for i in range(len(fruits_dict))]
+    df['log uniform'] = [fruits_log_uniform_ranked[i][1]/SAMPLING_NUMS for i in range(len(fruits_dict))]
+    print(df)
