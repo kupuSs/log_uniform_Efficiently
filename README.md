@@ -81,6 +81,6 @@ df['log uniform'] = [fruits_log_uniform_ranked[i][1]/SAMPLING_NUMS for i in rang
 ```
 
 
-![Image text](https://github.com/kupuSs/log_uniform_Efficiently/WX20200707-000711@2x.png)
+![Image text](https://github.com/kupuSs/log_uniform_Efficiently/blob/master/picture.png)
 
 > 会对长尾部分的数据进行更多的采样
